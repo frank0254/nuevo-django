@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+
+{% block title_head %}
+<title>Crear Bicicleta</title>
+{%endblock title_head %}
+
+
+{% block h1_header %}
+<h2 class="text-white mb-4" style="font-size:50px;">  </h2>
+{%endblock h1_header %}
+  
+{% block h2_header %}
+<h2 class="text-white-50 mx-auto mt-2 mb-5"></h2>
+{% endblock h2_header %}
+
+
+{%block main %}<!--
+    <form action="" method="POST">
+        {% csrf_token %}
+    
+    <p>
+    Marca:
+        <input type="text" name=" marca">
+    </p>
+    
+    <p>
+        Description: 
+        <input type="text" name=" description">
+    </p>
+    
+    <p>
+        Año
+        <input type="number" name=" anio">
+    </p>
+    
+    
+    <input type="submit" value="crear">
+    {% comment %} <button>crear</button> {% endcomment %}
+    
+    </form>
+    -->
+    
+    
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{formulario}}
+        <input type="submit" value="crear">
+    {% comment %} <button>crear</button> {% endcomment %}
+    
+    </form>
+    {% endblock main%}
+    
