@@ -3,11 +3,6 @@ from inicio.views import inicio, auto, moto, bicicletas, crear_auto, crear_moto,
 from inicio.views import detalle_auto
 
 
-
-
-
-
-
 urlpatterns = [
     path('', inicio, name='inicio'),
     path('auto/',auto,name='auto'), 

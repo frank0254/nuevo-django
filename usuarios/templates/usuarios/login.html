@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{% block title_head %}
+<title>Login</title>
+{%endblock title_head %}
+
+
+{% block h1_header %}
+<h2 class="text-white mb-4" style="font-size:50px;"> bienvenido </h2>
+{%endblock h1_header %}
+  
+{% block h2_header %}
+<h2 class="text-white-50 mx-auto mt-2 mb-5"></h2>
+{% endblock h2_header %}
+
+
+{%block main %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{formulario_de_login}}
+    <input type="submit" value="Iniciar Sesion">
+
+
+</form>
+
+
+{% endblock main%}
