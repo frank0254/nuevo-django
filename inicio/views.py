@@ -5,6 +5,7 @@ from inicio.models import Autos, Motos, Bicicletas
 from inicio.forms import CrearAutoFormulario
 from inicio.forms import CrearMotoFormulario
 from inicio.forms import CrearBicicletaFormulario
+from inicio.forms import ModificarAutoFormulario
 # Create your views here.
 
 def inicio(request):
@@ -66,6 +67,39 @@ def crear_auto(request):
     formulario = CrearAutoFormulario()
     return render(request, 'inicio/auto.html', {'formulario': formulario})
 
+def eliminar_auto(request, auto_id):
+    auto_a_eliminar= Autos.objects.get(id=auto_id)
+    auto_a_eliminar.delete()    
+    return redirect("auto")
+
+def modificar_auto(request, auto_id):
+    auto_a_modificar = Autos.objects.get(id=auto_id)
+    
+    if request. method == "POST":
+        formulario = ModificarAutoFormulario(request.POST)
+        if formulario.is_valid():
+            info_nueva = formulario.cleaned_data
+            
+            auto_a_modificar.marca = info_nueva.get('marca')
+            auto_a_modificar.descripcion = info_nueva.get('descripcion')
+            auto_a_modificar.anio = info_nueva.get('anio')
+            
+            auto_a_modificar.save()
+            return redirect('auto')
+        return render(request, 'inicio/modificar_auto.html', {'formulario': formulario})
+    
+    formulario = ModificarAutoFormulario(initial={'marca': auto_a_modificar.marca, 'anio':auto_a_modificar.anio, 'descripcion': auto_a_modificar.descripcion} )
+    return render(request, "inicio/modificar_auto.html", {'formulario': formulario})
+    
+def detalle_auto(request, auto_id):
+    auto = Autos.objects.get(id=auto_id)
+    
+
+    return render(request, 'inicio/detalle_auto.html', {'auto': auto})
+
+
+
+
 
 def crear_moto(request):
         
@@ -110,3 +144,4 @@ def crear_bicicleta(request):
         
     formulario = CrearBicicletaFormulario()
     return render(request, 'inicio/bicicleta.html', {'formulario': formulario})
+

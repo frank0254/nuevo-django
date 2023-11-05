@@ -28,12 +28,12 @@
 
 
     {% for auto in listado_de_auto%} 
-    <li>{{auto}}</li> 
+    <li>{{auto}}  <a href={% url "modificar_auto" auto.id%}> modificar</a> <a href={% url "eliminar_auto" auto.id %}>Eliminar</a> <a href= {% url "detalle_auto" auto.id%}> Ver mas </a> </li> 
     {% endfor %}
 
 
     {% for moto in listado_de_moto %} 
-    <li>{{moto}}</li> 
+    <li>{{moto}}  </li> 
     {% endfor %}
 
     {% for bicicleta in listado_de_bicicleta %}  

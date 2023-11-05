@@ -1,9 +1,18 @@
 from django import forms
 
-class CrearAutoFormulario(forms.Form):
+class BaseAutoFormulario(forms.Form):
     marca = forms.CharField(max_length=30)
     descripcion = forms.CharField(max_length=250)
     anio = forms.IntegerField()
+    
+
+
+class CrearAutoFormulario(BaseAutoFormulario):
+    ...
+
+class ModificarAutoFormulario(BaseAutoFormulario):
+    ...
+
 
 
 class CrearMotoFormulario(forms.Form):
