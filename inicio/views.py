@@ -6,6 +6,10 @@ from inicio.forms import CrearAutoFormulario
 from inicio.forms import CrearMotoFormulario
 from inicio.forms import CrearBicicletaFormulario
 from inicio.forms import ModificarAutoFormulario
+from django.contrib.auth.decorators import login_required
+
+
+
 # Create your views here.
 
 def inicio(request):
@@ -26,7 +30,12 @@ def auto(request):
         listado_de_auto = Autos.objects.filter(marca__icontains =marca_a_buscar.lower())
     else:
         listado_de_auto = Autos.objects.all()
-    return render(request, 'inicio/vehiculo.html', {'listado_de_auto': listado_de_auto})    
+        
+    if not listado_de_auto:
+        mensaje = 'no se encontraron datos buscados'
+    else:
+        mensaje = ''
+    return render(request, 'inicio/vehiculo.html', {'listado_de_auto': listado_de_auto, 'mensaje':mensaje})    
     
     listado_de_auto = Autos.objects.all()
    
@@ -44,34 +53,38 @@ def bicicletas(request):
    
     return render(request, 'inicio/vehiculo.html', {'listado_de_moto': listado_de_bicicleta})
     
-    
+@login_required    
 def crear_auto(request):
     
-        
     if request.method == 'POST':
-        formulario = CrearAutoFormulario(request.POST)
+        formulario = CrearAutoFormulario(request.POST, request.FILES)
         if formulario.is_valid():
             info_limpia = formulario.cleaned_data
             
             marca = info_limpia.get('marca')
             descripcion = info_limpia.get('descripcion')
             anio = info_limpia.get('anio')
+            modelo = info_limpia.get('modelo')
+            imagen_a_agregar = info_limpia.get('imagen_a_agregar') 
+           
     
-            auto = Autos(marca=marca, descripcion=descripcion, anio=anio)    
+            auto = Autos(marca=marca, descripcion=descripcion, anio=anio, modelo=modelo, imagen_a_agregar=imagen_a_agregar)    
             auto.save()
             
-            return redirect(crear_auto)
+            return redirect(crear_auto) 
         else:
             return render(request, 'inicio/auto.html', {'formulario': formulario})
         
     formulario = CrearAutoFormulario()
     return render(request, 'inicio/auto.html', {'formulario': formulario})
 
+@login_required 
 def eliminar_auto(request, auto_id):
     auto_a_eliminar= Autos.objects.get(id=auto_id)
     auto_a_eliminar.delete()    
     return redirect("auto")
 
+@login_required 
 def modificar_auto(request, auto_id):
     auto_a_modificar = Autos.objects.get(id=auto_id)
     
@@ -83,6 +96,9 @@ def modificar_auto(request, auto_id):
             auto_a_modificar.marca = info_nueva.get('marca')
             auto_a_modificar.descripcion = info_nueva.get('descripcion')
             auto_a_modificar.anio = info_nueva.get('anio')
+            auto_a_modificar.modelo = info_nueva.get('modelo')
+            auto_a_modificar.imagen_a_agregar = info_nueva.get('imagen_a_agregar')
+            auto_a_modificar.fecha_de_creacion = info_nueva.get('fecha_de_creacion')
             
             auto_a_modificar.save()
             return redirect('auto')

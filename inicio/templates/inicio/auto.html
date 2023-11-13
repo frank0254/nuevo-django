@@ -45,13 +45,17 @@ Marca:
 
 
 
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{formulario}}
+    <table>
+        {{formulario.media}}
+        {{formulario}}
+    </table>
     <input type="submit" value="crear">
 {% comment %} <button>crear</button> {% endcomment %}
 
 </form>
+
 
 
 {% endblock main%}

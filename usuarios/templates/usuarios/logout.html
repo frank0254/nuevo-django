@@ -2,7 +2,7 @@
 
 
 {% block title_head %}
-<title>Login</title>
+<title>logout</title>
 {%endblock title_head %}
 
 
@@ -17,15 +17,7 @@
 
 {%block main %}
 
-<form action= {% url "login"%} method="POST">
-    {% csrf_token %}
-<table>
-    {{formulario_de_login}}
-</table>
-    <input type="submit" value="Iniciar Sesion">
-
-
-</form>
+<h3> Cerrasre sesion con exito </h3>
 
 
 {% endblock main%}

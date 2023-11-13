@@ -2,7 +2,7 @@
 
 
 {% block title_head %}
-<title>Login</title>
+<title>Editar Perfil</title>
 {%endblock title_head %}
 
 
@@ -17,15 +17,14 @@
 
 {%block main %}
 
-<form action= {% url "login"%} method="POST">
+<form action= {% url "editar_perfil"%} method="POST" enctype='multipart/form-data'>
     {% csrf_token %}
 <table>
-    {{formulario_de_login}}
+    {{formulario}}
 </table>
-    <input type="submit" value="Iniciar Sesion">
+    <input type="submit" value="Editar Datos">
 
 
 </form>
-
-
+<a href= {%url "cambiar_password" %}>Cambiar Password </a>
 {% endblock main%}
