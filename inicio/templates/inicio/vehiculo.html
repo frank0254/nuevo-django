@@ -25,9 +25,9 @@
     <input type="text" name="marca" placeholder="año, description">
     <input type="submit" value="buscar"> 
 
-    <a href="{% url 'crear_auto' %}" class="btn btn-primary">Crear Auto</a>
-    <a href="{% url 'crear_moto' %}" class="btn btn-primary">Crear Moto</a>
-    <a href="{% url 'crear_bicicleta' %}" class="btn btn-primary">Crear Bicicleta</a>
+    <a href="{% url 'crear_auto' %}" class="btn btn-primary">Publicar Auto</a>
+    <a href="{% url 'crear_moto' %}" class="btn btn-primary">Publicar Moto</a>
+    <a href="{% url 'crear_bicicleta' %}" class="btn btn-primary">Publicar Bicicleta</a>
 
     {% for auto in listado_de_auto%} 
     <li>{{auto}}  <a href={% url "modificar_auto" auto.id%}> modificar</a> <a href={% url "eliminar_auto" auto.id %}>Eliminar</a> <a href= {% url "detalle_auto" auto.id%}> Ver mas </a> </li> 
