@@ -66,9 +66,9 @@ def crear_auto(request):
             anio = info_limpia.get('anio')
             modelo = info_limpia.get('modelo')
             imagen_a_agregar = info_limpia.get('imagen_a_agregar') 
-           
+            fecha_de_creacion = info_limpia.get('fecha_de_creacion')
     
-            auto = Autos(marca=marca, descripcion=descripcion, anio=anio, modelo=modelo, imagen_a_agregar=imagen_a_agregar)    
+            auto = Autos(marca=marca, descripcion=descripcion, anio=anio, modelo=modelo, imagen_a_agregar=imagen_a_agregar, fecha_de_creacion=fecha_de_creacion)    
             auto.save()
             
             return redirect(crear_auto) 
@@ -104,7 +104,7 @@ def modificar_auto(request, auto_id):
             return redirect('auto')
         return render(request, 'inicio/modificar_auto.html', {'formulario': formulario})
     
-    formulario = ModificarAutoFormulario(initial={'marca': auto_a_modificar.marca, 'anio':auto_a_modificar.anio, 'descripcion': auto_a_modificar.descripcion} )
+    formulario = ModificarAutoFormulario(initial={'marca': auto_a_modificar.marca, 'anio':auto_a_modificar.anio, 'descripcion': auto_a_modificar.descripcion, 'modelo': auto_a_modificar.modelo, 'imagen_a_agregar': auto_a_modificar.imagen_a_agregar, 'fecha_de_creacion': auto_a_modificar.fecha_de_creacion} )
     return render(request, "inicio/modificar_auto.html", {'formulario': formulario})
     
 def detalle_auto(request, auto_id):

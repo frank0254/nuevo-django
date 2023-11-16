@@ -12,7 +12,7 @@ class Autos(models.Model):
     fecha_de_creacion = models.DateField(default=timezone.now)
     imagen_a_agregar = models.ImageField(upload_to='avatares', null=True, blank=True)
     
-    def __str__(self):
+    def __str__(self):  
         return f' {self.id} - {self.marca} - {self.anio}'
     
     
